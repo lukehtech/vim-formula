@@ -1,4 +1,6 @@
-{% set vim = salt['grains.filter_by']({
+{% import_yaml 'vim/defaults.yaml' as default_settings %}
+
+{% set os_family_map = salt['grains.filter_by']({
     'Arch': {
         'pkg': 'vim',
         'share_dir': '/usr/share/vim/vimfiles',
@@ -54,3 +56,12 @@
         'autoload_dir': '/etc/vim/autoload',
     },
 }, merge=salt['pillar.get']('vim:lookup')) %}
+
+{% do default_settings.vim.update(os_family_map) %}
+
+{% set vim = salt['pillar.get'](
+        'vim',
+        default=default_settings.vim,
+        merge=True
+    )
+%}

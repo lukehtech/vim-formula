@@ -1,13 +1,10 @@
+{%- from "vim/map.jinja" import vim with context -%}
 {% set config   = salt['pillar.get']('vim:config', {}) -%}
 {% set settings = salt['pillar.get']('vim:settings', {}) -%}
 {% set mappings = salt['pillar.get']('vim:mappings', {}) -%}
 {% set lets = salt['pillar.get']('vim:lets', {}) -%}
 {% set allow_localrc = salt['pillar.get']('vim:allow_localrc', {}) -%}
 
-{% if vim.get('enabled_pathogen', false) %}
-set runtimepath+={{ vim.autoload_dir }}
-execute pathogen#infect()
-{% endif %}
 
 {% macro set_config(config, prefix='') -%}
 {% for parameter in config | sort -%}
@@ -83,3 +80,11 @@ if filereadable("{{ config_root }}/vimrc.local")
 endif
 {% endif -%}
 
+
+{%- if vim.get('enabled_pathogen', false) %}
+if filereadable("{{ vim.autoload_dir }}/pathogen.vim")
+    source {{ vim.autoload_dir }}/pathogen.vim
+    set runtimepath+={{ vim.autoload_dir }}
+    execute pathogen#infect()
+endif
+{% endif -%}
