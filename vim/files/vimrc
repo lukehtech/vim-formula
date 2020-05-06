@@ -4,6 +4,11 @@
 {% set lets = salt['pillar.get']('vim:lets', {}) -%}
 {% set allow_localrc = salt['pillar.get']('vim:allow_localrc', {}) -%}
 
+{% if vim.get('enabled_pathogen', false) %}
+set runtimepath+={{ vim.autoload_dir }}
+execute pathogen#infect()
+{% endif %}
+
 {% macro set_config(config, prefix='') -%}
 {% for parameter in config | sort -%}
 {% set value = config.get(parameter) -%}

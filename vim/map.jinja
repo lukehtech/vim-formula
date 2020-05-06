@@ -4,6 +4,7 @@
         'share_dir': '/usr/share/vim/vimfiles',
         'group': 'root',
         'config_root': '/etc',
+        'autoload_dir': '/etc/vim/autoload',
     },
     'Debian': {
         'alternatives': {
@@ -15,35 +16,41 @@
         'share_dir': '/usr/share/vim/vimfiles',
         'group': 'root',
         'config_root': '/etc/vim',
+        'autoload_dir': '/etc/vim/autoload',
     },
     'OpenBSD': {
         'pkg': 'vim--no_x11',
         'share_dir': '/usr/local/share/vim/vimfiles',
         'group': 'wheel',
         'config_root': '/etc',
+        'autoload_dir': '/etc/vim/autoload',
     },
     'RedHat': {
         'pkg': 'vim-enhanced',
         'share_dir': '/usr/share/vim/vimfiles',
         'group': 'root',
         'config_root': '/etc',
+        'autoload_dir': '/etc/vim/autoload',
     },
     'Suse': {
         'pkg': 'vim',
         'share_dir': '/usr/share/vim/site',
         'group': 'root',
         'config_root': '/etc',
+        'autoload_dir': '/etc/vim/autoload',
     },
     'FreeBSD': {
         'pkg': 'vim',
         'share_dir': '/usr/local/share/vim/vimfiles',
         'group': 'wheel',
         'config_root': '/etc',
+        'autoload_dir': '/etc/vim/autoload',
         },
     'Gentoo': {
         'pkg': 'app-editors/vim',
         'share_dir': '/usr/share/vim/vimfiles',
         'group': 'wheel',
         'config_root': '/etc',
+        'autoload_dir': '/etc/vim/autoload',
     },
 }, merge=salt['pillar.get']('vim:lookup')) %}
